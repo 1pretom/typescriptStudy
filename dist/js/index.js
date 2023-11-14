@@ -1,62 +1,44 @@
 "use strict";
-// Tipagem correta
 var x = 10;
 x = 20;
 x = 5;
 console.log(x);
-// Inferencia x annotation: são formas de definir valor com tipo
-// Inferencia tem menos código
 let inferencia = 12;
-// Annotation tem o código escrito
 let annotation = "annotation";
-// Tipos básicos
 let nickName = "Wash";
 let myAge = 27;
 const isHuman = true;
-// Objetos são com letra maíuscula, tipos são com letras minusculas
-// Quando usa typeof ele mostra como devemos utilizar o tipo
 console.log(typeof nickName);
 console.log(typeof myAge);
 console.log(typeof isHuman);
-// Tipando objetos
 const arrayOfNumbers = [10, 20, 30];
 console.log(arrayOfNumbers);
 console.log(arrayOfNumbers.length.toPrecision());
-// o typescript não permite: console.log(myNumbers.toLowerCase)
 console.log(nickName.toLowerCase());
 arrayOfNumbers.push(40);
 console.log(arrayOfNumbers);
-// Tuplas - são diferentes tipos que devem estar na mesma ordem na hora de utilizar
 let myTuple = [
     myAge,
     arrayOfNumbers,
     nickName,
     isHuman,
 ];
-// Objetis literais com propriedade e valor {prop: value}
 const user = {
     name: nickName,
     age: myAge,
 };
 console.log(user);
 console.log(user.name.toUpperCase());
-// Não é possivel adicionar nova propriedade, como no js
-// É possível tipar com any, mas isso vai contra a filosofia do tsc, é claro. porém existe essa possibilidade
-// Existem saidas para quando o tipo de dado é mais de um, que não envolvem utilizar o any
-// any costuma ser usado para que a compilação não dê erro
 let exampleAny = 0;
 exampleAny = true;
 exampleAny = "test";
 exampleAny = {};
 exampleAny = [];
-// union type é o melhor jeito de criar um tipo mais complexo, usamos pipes: | para separar um tipo do outro
 let id;
 id = 1;
 id = "one";
 const userID = 10;
 const productID = "SKU4F93";
-// enum enumera uma colection e podemos usar os dados de uma maneira mais simples.
-//tamanho de roupas
 var Size;
 (function (Size) {
     Size["S"] = "Small";
@@ -68,3 +50,82 @@ const teeShirt = {
     size: Size.B,
 };
 console.log(teeShirt);
+let authentication;
+authentication = null;
+authentication = "authentication";
+function sum(a, b) {
+    return a + b;
+}
+console.log(sum(5, 5));
+function sayHelloTo(name) {
+    return `Hello ${name}`;
+}
+console.log(sayHelloTo(nickName));
+function logger(msg) {
+    console.log(msg);
+}
+logger("Test");
+function greeting(name, greet) {
+    if (greet) {
+        console.log(`Olá ${greet} ${name}`);
+    }
+    else {
+        console.log(`Olá ${name}`);
+    }
+}
+greeting(nickName);
+greeting(nickName, "sir");
+const sumNumbers = (nums) => {
+    return nums.n1 + nums.n2;
+};
+console.log(sumNumbers({ n1: 1, n2: 2 }));
+const multNumbers = (nums) => {
+    return nums.n1 * nums.n2;
+};
+console.log(multNumbers({ n1: 1, n2: 2 }));
+const otherNumbers = {
+    n1: 5,
+    n2: 10,
+};
+console.log(multNumbers(otherNumbers));
+console.log(sumNumbers(otherNumbers));
+const showNumber = (info) => {
+    if (typeof info === "number") {
+        return console.log(`o número é ${info}`);
+    }
+    console.log("Não foi passado um número");
+};
+showNumber(myAge);
+showNumber(false);
+showNumber(nickName);
+const showArraysItems = (arrays) => {
+    arrays.forEach((item) => {
+        console.log(`item é ${item}`);
+    });
+};
+const array1 = [1, 3, 4, 5];
+const array2 = ["a", "b", "c", "d"];
+const array3 = [];
+const notArray = "not array";
+showArraysItems(array1);
+showArraysItems(array2);
+showArraysItems(array3);
+class User {
+    name;
+    role;
+    isAproved;
+    constructor(name, role, isAproved) {
+        this.name = name;
+        this.role = role;
+        this.isAproved = isAproved;
+    }
+    showUserRole(restrict) {
+        if (!restrict) {
+            return `A posição do usuário é ${this.role}`;
+        }
+        return ("informação restrita");
+    }
+}
+const wash = new User("Washington", "CTO", true);
+console.log(wash);
+console.log(wash.showUserRole(true));
