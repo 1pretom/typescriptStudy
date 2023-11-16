@@ -188,13 +188,71 @@ class User {
     this.role = role;
     this.isAproved = isAproved;
   }
-  showUserRole(restrict: boolean):string {
+  showUserRole(restrict: boolean): string {
     if (!restrict) {
-     return `A posição do usuário é ${this.role}`;
-    }return ("informação restrita");
+      return `A posição do usuário é ${this.role}`;
+    }
+    return "informação restrita";
   }
 }
 
 const wash = new User("Washington", "CTO", true);
 console.log(wash);
 console.log(wash.showUserRole(true));
+
+// Interfaces em classes como em Java
+interface IVechicle {
+  brand: string;
+  showBrand(): void;
+}
+
+class Car implements IVechicle {
+  brand;
+  wheels;
+  constructor(brand: string, wheels: number) {
+    this.brand = brand;
+    this.wheels = wheels;
+  }
+  showBrand(): void {
+    console.log(`A marca do carro é ${this.brand}`);
+  }
+}
+
+const fusca = new Car("VW", 4);
+fusca.showBrand();
+
+// Herança
+
+class SuperCar extends Car {
+  engine;
+  constructor(brand: string, wheels: number, engine: number) {
+    super(brand, wheels);
+    this.engine = engine;
+  }
+}
+
+const a4 = new SuperCar("Audi", 4, 2.0);
+console.log(a4);
+a4.showBrand();
+
+// Decorators
+// Constructor decorator
+function BaseParameters() {
+  return function <T extends { new (...args: any[]): {} }>(constructor: T) {
+    return class extends constructor {
+      id = Math.random();
+      createAt = new Date();
+    };
+  };
+}
+@BaseParameters()
+class Person {
+  name;
+
+  constructor(name: string) {
+    this.name = name;
+  }
+}
+
+const sam = new Person("Sam");
+console.log(sam);
